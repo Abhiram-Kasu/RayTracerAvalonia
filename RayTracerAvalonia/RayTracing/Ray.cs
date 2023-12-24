@@ -18,16 +18,19 @@ public record class Ray
     {
 
         var ray = this;
-        var distances = scene.Shapes.Select(shape => (shape, shape.ClosestDistanceAlongRay(ray))).Where(x => x.Item2 is not null).ToList();
+        var distances = scene.Shapes.Select(shape => (Shape: shape, Distance: shape.ClosestDistanceAlongRay(ray))).Where(x => x.Distance is not null).ToList();
         if (!distances.Any())
         {
 
             return scene.BackgroundColor;
         }
 
-        var closestShape = distances.MinBy(x => x.Item2).Item1;
+        var closest = distances.MinBy(x => x.Distance);
         //var closestShape = scene.Shapes[distances.IndexOf(shortestDistance)];
-        return closestShape.Color;
+
+
+        var point = Start + (Direction * closest.Distance!.Value);
+        return closest.Shape.GetColorAt(point, in scene);
 
 
     }

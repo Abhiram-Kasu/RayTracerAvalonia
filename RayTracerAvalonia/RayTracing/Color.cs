@@ -1,5 +1,7 @@
-﻿namespace RayTracerAvalonia.RayTracing;
-public readonly record struct Color(byte R, byte G, byte B, byte Alpha = 255)
+﻿using System.Numerics;
+
+namespace RayTracerAvalonia.RayTracing;
+public readonly record struct Color(byte R, byte G, byte B, byte Alpha = 255) : Material
 {
     public static readonly Color White = new Color(255, 255, 255);
 
@@ -24,6 +26,9 @@ public readonly record struct Color(byte R, byte G, byte B, byte Alpha = 255)
         > 255 => 255,
         _ => (byte)value
     };
+
+    public Color GetColorAt(Vector3 point) => this;
+
     public static Color operator +(Color c1, Color c2)
     {
         return new Color(
