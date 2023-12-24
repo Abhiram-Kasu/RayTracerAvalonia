@@ -1,0 +1,64 @@
+<UserControl
+    x:Class="RayTracerAvalonia.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:RayTracerAvalonia.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="*, Auto" RowDefinitions="*,50">
+
+
+        <Image Name="MainCanvas" Source="{Binding ImageSource}" />
+
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+
+
+            <Button Command="{Binding RenderParalellCommand}" Content="Render Parallel" />
+            <Button Margin="10,0" Content="{Binding Elapsed}" />
+            <ProgressBar
+                IsEnabled="{Binding IsBusy}"
+                IsIndeterminate="True"
+                IsVisible="{Binding IsBusy}" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="5">
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                Camera X:
+            </TextBlock>
+            <NumericUpDown IsEnabled="{Binding IsNotBusy}" Value="{Binding CameraX}" />
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                Camera Y:
+            </TextBlock>
+            <NumericUpDown IsEnabled="{Binding IsNotBusy}" Value="{Binding CameraY}" />
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                Camera Z:
+            </TextBlock>
+            <NumericUpDown IsEnabled="{Binding IsNotBusy}" Value="{Binding CameraZ}" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>
