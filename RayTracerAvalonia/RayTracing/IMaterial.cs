@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 
 namespace RayTracerAvalonia.RayTracing;
-public interface Material
+public interface IMaterial
 {
     public Color GetColorAt(Vector3 point);
 }

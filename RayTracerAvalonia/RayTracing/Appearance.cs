@@ -1,10 +1,10 @@
 ﻿using System.Numerics;
 
 namespace RayTracerAvalonia.RayTracing;
-public struct Appearance : Material
+public struct Appearance : IMaterial
 {
-    public Material Material { get; set; }
-    public Appearance(Material? material = null)
+    public IMaterial Material { get; set; }
+    public Appearance(IMaterial? material = null)
     {
         Material = material ?? Color.Grey;
     }

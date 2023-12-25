@@ -14,7 +14,7 @@ public record class Ray
         Start = start;
         Direction = direction.Normalize();
     }
-    public Color Trace(in Scene scene)
+    public Color Trace(Scene scene)
     {
 
         var ray = this;
@@ -22,7 +22,7 @@ public record class Ray
         if (!distances.Any())
         {
 
-            return scene.BackgroundColor;
+            return scene.BackgroundMaterial.GetColorAt(default);
         }
 
         var closest = distances.MinBy(x => x.Distance);
@@ -30,7 +30,7 @@ public record class Ray
 
 
         var point = Start + (Direction * closest.Distance!.Value);
-        return closest.Shape.GetColorAt(point, in scene);
+        return closest.Shape.GetColorAt(point, scene);
 
 
     }

@@ -27,14 +27,14 @@ public struct Camera
         Up = Vector3.Cross(Right, Direction).Normalize() * (-height / 2);
     }
 
-    public readonly Color Trace(in Scene scene, float x, float y)
+    public readonly Color Trace(Scene scene, float x, float y)
     {
         var xRay = Right * x;
         var yRay = -Up * y;
         var rayDir = Direction + xRay + yRay;
         var ray = new Ray(Location, rayDir);
 
-        return ray.Trace(in scene);
+        return ray.Trace(scene);
 
     }
 }

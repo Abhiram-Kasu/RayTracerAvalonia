@@ -24,7 +24,7 @@ public partial class MainViewModel : ViewModelBase
 
     private readonly Renderer _renderer = new(_width, _height);
 
-    private Scene _currentScene = ExampleScenes.ColoredSpheres();
+    private Scene _currentScene = ExampleScenes.AssortedShapes();
 
     public MainViewModel()
     {
@@ -82,13 +82,14 @@ public partial class MainViewModel : ViewModelBase
     {
         if (IsBusy) return;
         IsBusy = true;
+
         _currentScene.Camera = _currentScene.Camera with { Location = new(CameraX, CameraY, CameraZ) };
 
         // _currentScene = new Scene(RayTracing.Color.Cyan, new Camera(new System.Numerics.Vector3(0, 0, -8), Vector3.UnitZ), []);
 
         var st = Stopwatch.StartNew();
 
-        await Task.Run(() => _renderer.Render(ref pixels, in _currentScene));
+        await Task.Run(() => _renderer.Render(ref pixels, _currentScene));
 
         //Parallel.For(0, _height, h =>
         //{

@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 
 namespace RayTracerAvalonia.RayTracing;
-public readonly record struct Color(byte R, byte G, byte B, byte Alpha = 255) : Material
+public readonly record struct Color(byte R, byte G, byte B, byte Alpha = 255) : IMaterial
 {
     public static readonly Color White = new Color(255, 255, 255);
 

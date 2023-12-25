@@ -3,7 +3,7 @@
 namespace RayTracerAvalonia.RayTracing;
 public class Renderer(int CanvasWidth, int CanvasHeight)
 {
-    public void Render(ref byte[] canvas, in Scene scene)
+    public void Render(ref byte[] canvas, Scene scene)
     {
         var tempCanvas = canvas;
         var tempScene = scene;

@@ -5,17 +5,17 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace RayTracerAvalonia.RayTracing.Shapes;
-public readonly struct Sphere(Color color, Vector3 center, float radius, Appearance appearance) : IShape
+public readonly struct Sphere(Vector3 center, float radius, IMaterial appearance) : IShape
 {
 
 
 
 
-    public Color Color { get; } = color;
+
     public Vector3 Center { get; } = center;
     public float Radius { get; } = radius;
 
-    public Appearance Appearance => appearance;
+    public IMaterial Appearance => appearance;
 
     public Vector3 GetNormalAt(Vector3 point)
     {

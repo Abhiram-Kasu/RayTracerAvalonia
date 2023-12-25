@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 
 namespace RayTracerAvalonia.RayTracing;
-public struct Scene(Color backgroundColor, Camera camera, List<IShape> shapes, List<Light> lights)
+public class Scene(IMaterial background, Camera camera, List<IShape> shapes, List<Light> lights)
 {
-    public Color BackgroundColor { get; set; } = backgroundColor;
+    public IMaterial BackgroundMaterial { get; set; } = background;
     public Camera Camera { get; set; } = camera;
 
     public List<IShape> Shapes { get; set; } = shapes;
