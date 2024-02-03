@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Collections.Generic;
+using Avalonia;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -7,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using RayTracerAvalonia.RayTracing;
 using RayTracerAvalonia.RayTracing.Examples;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -106,6 +108,8 @@ public partial class MainViewModel : ViewModelBase
 
         SetImage();
         Elapsed = $"Elapsed: {st.ElapsedMilliseconds}";
+        _renderTimes.Add(st.ElapsedMilliseconds);
+        AverageTimeToRender = _renderTimes.Sum() / _renderTimes.Count;
         IsBusy = false;
 
 
@@ -129,4 +133,9 @@ public partial class MainViewModel : ViewModelBase
         //this.OnPropertyChanged(nameof(ImageSource));
 
     }
+
+    [ObservableProperty]
+    private float _averageTimeToRender;
+
+    private List<float> _renderTimes = [];
 }

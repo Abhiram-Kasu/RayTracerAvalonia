@@ -16,20 +16,21 @@ public struct Plane : IShape
         this.distance = distance;
     }
 
-    public List<float> FindIntersections(Ray ray)
+    private readonly List<float> _emptyList = [];
+    public readonly List<float> FindIntersections(Ray ray)
     {
-        float angle = Vector3.Dot(ray.Direction, normal);
+        var angle = Vector3.Dot(ray.Direction, normal);
 
         // If the dot-product is zero, the ray is perpendicular to the plane's normal,
         // therefore the ray is parallel to the plane and will never intersect.
         if (Math.Abs(angle) < float.Epsilon)
-            return [];
+            return _emptyList;
 
-        float b = Vector3.Dot(normal, ray.Start + normal * -distance);
+        var b = Vector3.Dot(normal, ray.Start + normal * -distance);
         return [-b / angle];
     }
 
     public readonly Vector3 GetNormalAt(Vector3 _) => normal;
 
-    public List<float> Intersect(Ray ray) => FindIntersections(ray);
+    public readonly List<float> Intersect(Ray ray) => FindIntersections(ray);
 }

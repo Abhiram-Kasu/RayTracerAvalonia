@@ -31,6 +31,7 @@
 
             <Button Command="{Binding RenderParalellCommand}" Content="Render Parallel" />
             <Button Margin="10,0" Content="{Binding Elapsed}" />
+            <Button Margin="10,0" Content="{Binding AverageTimeToRender}" />
             <ProgressBar
                 IsEnabled="{Binding IsBusy}"
                 IsIndeterminate="True"

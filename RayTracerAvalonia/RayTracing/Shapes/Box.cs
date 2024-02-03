@@ -35,10 +35,17 @@ public readonly struct Box : IShape
 
     private List<float> FindIntersectionsOnAxis(int axis, Ray ray)
     {
-        var otherAxes = new[] { 0, 1, 2 }.Where(a => a != axis).ToArray();
+        var otherAxes = axis switch
+        {
+            0 => stackalloc int[]{1, 2},
+            1 => stackalloc int[]{0, 2},
+            2 => stackalloc int[]{0, 1},
+            _ => throw new Exception(),
+        };
+
         var intersections = new List<float>();
 
-        if (ray.Direction[axis] == 0)
+        if (Math.Abs(ray.Direction[axis]) < float.Epsilon)
             return intersections;
 
         foreach (var vertex in vertices)
@@ -55,10 +62,14 @@ public readonly struct Box : IShape
 
     public List<float> FindIntersections(Ray ray)
     {
-        return FindIntersectionsOnAxis(0, ray)
-            .Concat(FindIntersectionsOnAxis(1, ray))
-            .Concat(FindIntersectionsOnAxis(2, ray))
-            .ToList();
+        var intersections = new List<float>();
+
+        for (var axis = 0; axis < 3; axis++)
+        {
+            intersections.AddRange(FindIntersectionsOnAxis(axis, ray));
+        }
+
+        return intersections;
     }
 
     public Vector3 GetNormalAt(Vector3 pos)

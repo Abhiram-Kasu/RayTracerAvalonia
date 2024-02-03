@@ -30,19 +30,37 @@ public interface IShape
         var normal = GetNormalAt(point);
         var color = Color.Black;
 
-        var otherShapes = scene.Shapes.Where(x => x != this).ToList();
-
-        scene.Lights.ForEach(light =>
+        var otherShapes = new List<IShape>(scene.Shapes.Count-1);
+        
+        foreach (var shape in scene.Shapes)
         {
-            var v = VectorExtensions.From(point).To(light.Position);
+            if (shape != this)
+            {
+                otherShapes.Add(shape);
+            }
+        }
+
+        foreach (var light in scene.Lights)
+        {
+            var v = light.Position - point;
             var brightness = Vector3.Dot(normal, v.Normalize());
 
-            if (otherShapes.Any(x => x.CastsShadowFor(light.Position, -v))) return;
+            var castsShadow = false;
+            foreach (var shape in otherShapes)
+            {
+                if (shape.CastsShadowFor(light.Position, -v))
+                {
+                    castsShadow = true;
+                    break;
+                }
+            }
 
-            if (brightness <= 0) return;
+            if (castsShadow) continue;
+
+            if (brightness <= 0) continue;
             var illumination = light.Illuminate(Appearance, point, brightness);
             color += illumination;
-        });
+        }
         return color;
     }
 

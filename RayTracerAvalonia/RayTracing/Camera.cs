@@ -1,6 +1,7 @@
 ﻿using RayTracerAvalonia.RayTracing.Extensions;
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace RayTracerAvalonia.RayTracing;
 
@@ -22,11 +23,11 @@ public struct Camera
         Width = width;
         Height = height;
 
-        Direction = VectorExtensions.From(location).To(lookAt).Normalize();
+        Direction = (lookAt - location).Normalize();
         Right = Vector3.Cross(Vector3.UnitY, Direction).Normalize() * (width / 2);
         Up = Vector3.Cross(Right, Direction).Normalize() * (-height / 2);
     }
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly Color Trace(Scene scene, float x, float y)
     {
         var xRay = Right * x;

@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using RayTracerAvalonia.RayTracing.Shapes;
 
 namespace RayTracerAvalonia.RayTracing;
 public record class Ray
@@ -14,24 +16,22 @@ public record class Ray
         Start = start;
         Direction = direction.Normalize();
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Color Trace(Scene scene)
     {
+        float? minDistance = null;
+        IShape? closestShape = null;
+        Vector3 point = default;
 
-        var ray = this;
-        var distances = scene.Shapes.Select(shape => (Shape: shape, Distance: shape.ClosestDistanceAlongRay(ray))).Where(x => x.Distance is not null).ToList();
-        if (!distances.Any())
+        foreach (var shape in scene.Shapes)
         {
-
-            return scene.BackgroundMaterial.GetColorAt(default);
+            var distance = shape.ClosestDistanceAlongRay(this);
+            if (distance is null) continue;
+            if (minDistance is not null && !(distance < minDistance)) continue;
+            minDistance = distance;
+            closestShape = shape;
+            point = Start + (Direction * minDistance.Value);
         }
-
-        var closest = distances.MinBy(x => x.Distance);
-        //var closestShape = scene.Shapes[distances.IndexOf(shortestDistance)];
-
-
-        var point = Start + (Direction * closest.Distance!.Value);
-        return closest.Shape.GetColorAt(point, scene);
-
-
+        return closestShape?.GetColorAt(point, scene) ?? scene.BackgroundMaterial.GetColorAt(default);
     }
 }
