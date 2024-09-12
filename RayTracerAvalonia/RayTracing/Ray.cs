@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using RayTracerAvalonia.RayTracing.Shapes;
 
 namespace RayTracerAvalonia.RayTracing;
-public record class Ray
+public record struct Ray
 {
     public Vector3 Start { get; }
     public Vector3 Direction { get; }
@@ -25,7 +25,7 @@ public record class Ray
 
         foreach (var shape in scene.Shapes)
         {
-            var distance = shape.ClosestDistanceAlongRay(this);
+            var distance = IShape.ClosestDistanceAlongRay(shape, this);
             if (distance is null) continue;
             if (minDistance is not null && !(distance < minDistance)) continue;
             minDistance = distance;

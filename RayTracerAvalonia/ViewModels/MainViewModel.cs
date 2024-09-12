@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -28,15 +29,13 @@ public partial class MainViewModel : ViewModelBase
 
     private Scene _currentScene = ExampleScenes.AssortedShapes();
 
-    public MainViewModel()
-    {
-        (_cameraX, _cameraY, _cameraZ) = (_currentScene.Camera.Location.X, _currentScene.Camera.Location.Y, _currentScene.Camera.Location.Z);
-    }
+    public MainViewModel() => (_cameraX, _cameraY, _cameraZ) = (_currentScene.Camera.Location.X, _currentScene.Camera.Location.Y, _currentScene.Camera.Location.Z);
+    
 
     private float _cameraX;
     public float CameraX
     {
-        get { return _cameraX; }
+        get => _cameraX;
         set
         {
             _cameraX = value;
@@ -48,7 +47,7 @@ public partial class MainViewModel : ViewModelBase
     private float _cameraY;
     public float CameraY
     {
-        get { return _cameraY; }
+        get => _cameraY;
         set
         {
             _cameraY = value;
@@ -60,7 +59,7 @@ public partial class MainViewModel : ViewModelBase
     private float _cameraZ;
     public float CameraZ
     {
-        get { return _cameraZ; }
+        get => _cameraZ;
         set
         {
             _cameraZ = value;
@@ -108,7 +107,10 @@ public partial class MainViewModel : ViewModelBase
 
         SetImage();
         Elapsed = $"Elapsed: {st.ElapsedMilliseconds}";
+        
         _renderTimes.Add(st.ElapsedMilliseconds);
+
+        MinTimeToRender = MathF.Min(MinTimeToRender, st.ElapsedMilliseconds);
         AverageTimeToRender = _renderTimes.Sum() / _renderTimes.Count;
         IsBusy = false;
 
@@ -136,6 +138,10 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private float _averageTimeToRender;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(FormattedMinTimeToRender))]
+    private float _minTimeToRender = float.MaxValue;
+    
+    public string FormattedMinTimeToRender => $"Min: {MinTimeToRender}ms";
 
-    private List<float> _renderTimes = [];
+    private readonly List<float> _renderTimes = [];
 }

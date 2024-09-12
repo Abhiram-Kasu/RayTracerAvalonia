@@ -33,20 +33,24 @@ public readonly struct Box : IShape
 
     private bool Contains(Vector3 point, int axis) => lowerCorner[axis] < point[axis] && point[axis] < upperCorner[axis];
 
-    private List<float> FindIntersectionsOnAxis(int axis, Ray ray)
+    private static readonly int[] _zeroAxes = [ 1, 2 ];
+    private static readonly int[] _oneAxes = [0, 2 ];
+    private static readonly int[] _twoAxes = [ 0, 1 ];
+    private static readonly List<float> Empty = [];
+    private List<float> FindIntersectionsOnAxis(int axis, Ray ray, List<float> intersections)
     {
         var otherAxes = axis switch
         {
-            0 => stackalloc int[]{1, 2},
-            1 => stackalloc int[]{0, 2},
-            2 => stackalloc int[]{0, 1},
-            _ => throw new Exception(),
+            0 => _zeroAxes,
+            1 => _oneAxes,
+            2 => _twoAxes,
         };
-
-        var intersections = new List<float>();
+        
 
         if (Math.Abs(ray.Direction[axis]) < float.Epsilon)
-            return intersections;
+            return Empty;
+
+
 
         foreach (var vertex in vertices)
         {
@@ -66,7 +70,8 @@ public readonly struct Box : IShape
 
         for (var axis = 0; axis < 3; axis++)
         {
-            intersections.AddRange(FindIntersectionsOnAxis(axis, ray));
+            FindIntersectionsOnAxis(axis, ray, intersections);
+
         }
 
         return intersections;
