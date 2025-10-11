@@ -8,6 +8,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:MainViewModel"
+    x:CompileBindings="True"
     mc:Ignorable="d">
     <Design.DataContext>
         <!--

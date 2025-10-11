@@ -6,8 +6,9 @@
     <TargetFramework>net8.0</TargetFramework>
 	 
     <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+      <PublishAot>true</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>

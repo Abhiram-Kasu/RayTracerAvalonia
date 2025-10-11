@@ -7,6 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RayTracerAvalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+        x:CompileBindings="True"
         Title="RayTracerAvalonia">
         <views:MainView />
 </Window>
