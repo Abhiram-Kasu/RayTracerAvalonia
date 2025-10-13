@@ -1,0 +1,16 @@
+CompileFlags:
+  Add:
+    - "-Wall"
+    - "-Wextra"
+  CompilationDatabase: .
+
+Index:
+  Background: Build
+
+Diagnostics:
+  UnusedIncludes: Strict
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true

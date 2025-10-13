@@ -9,6 +9,8 @@
     <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
       <PublishAot>true</PublishAot>
+      <OptimizationPreference>Speed</OptimizationPreference>
+
   </PropertyGroup>
 
   <ItemGroup>

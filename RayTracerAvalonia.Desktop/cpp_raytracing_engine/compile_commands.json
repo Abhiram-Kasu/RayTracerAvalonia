@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/engine.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/engine.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/engine.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/engine.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/renderer.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/renderer.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/renderer.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/renderer.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/scene.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/scene.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/scene.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/scene.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/camera.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/camera.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/camera.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/camera.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/color.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/color.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/color.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/color.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/ray.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/ray.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/ray.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/ray.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/shape.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/shape.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/shape.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/shape.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/light.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/light.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/light.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/light.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/box.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/box.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/box.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/box.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/plane.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/plane.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/plane.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/plane.cpp.o"
+},
+{
+  "directory": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -Dcpp_raytracing_engine_EXPORTS -I/Users/abhiramkasu/Projects/cpp_raytracing_engine/include -I/usr/local/include/eigen -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -fPIC -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include -O3 -ffast-math -o CMakeFiles/cpp_raytracing_engine.dir/sphere.cpp.o -c /Users/abhiramkasu/Projects/cpp_raytracing_engine/sphere.cpp",
+  "file": "/Users/abhiramkasu/Projects/cpp_raytracing_engine/sphere.cpp",
+  "output": "CMakeFiles/cpp_raytracing_engine.dir/sphere.cpp.o"
+}
+]
