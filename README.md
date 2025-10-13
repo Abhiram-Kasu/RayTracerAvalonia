@@ -2,8 +2,6 @@
 
 A high-performance ray tracer built with Avalonia UI, showcasing the power of C# optimization and C++/C# interop for maximum performance. This project demonstrates how to build a real-time ray tracing engine with both pure C# and native C++ implementations.
 
-![Ray Tracer Demo](assets/demo.png)
-
 ## Overview
 
 RayTracerAvalonia is a cross-platform ray tracing application that renders 3D scenes in real-time. The project started as a pure C# implementation and evolved to include a high-performance C++ rendering engine, demonstrating the power of native interop when maximum performance is required.
