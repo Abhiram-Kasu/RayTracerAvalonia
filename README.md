@@ -65,7 +65,7 @@ RayTracerAvalonia.Desktop/cpp_raytracing_engine/
 
 ## C++/C# Interop
 
-The project demonstrates seamless interop between C# and C++ using P/Invoke (Platform Invoke). This allows the C# application to call native C++ functions with minimal overhead.
+The project demonstrates seamless interop between C# and C++ using P/Invoke (Platform Invoke) with Native AOT compilation. The application links natively with the DLL at compile time, allowing the C# application to call native C++ functions with minimal overhead.
 
 ### How It Works
 
@@ -121,12 +121,12 @@ This approach provides:
 
 ### Performance Comparison
 
-The C++ implementation typically achieves **2-5x faster** render times compared to the optimized C# version:
+The C++ implementation typically achieves **3-4x faster** render times compared to the optimized C# version:
 
-| Implementation | Typical Render Time (1280x720) |
-|---------------|-------------------------------|
-| C# (Parallel) | ~80-150ms                     |
-| C++ (OpenMP)  | ~25-50ms                      |
+| Implementation | Typical Render Time (5120x2880) |
+|---------------|----------------------------------|
+| C# (Parallel) | ~700ms                           |
+| C++ (OpenMP)  | ~200ms                           |
 
 *Performance varies based on scene complexity and CPU capabilities*
 
