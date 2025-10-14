@@ -27,9 +27,9 @@ public partial class MainViewModel : ViewModelBase, IDisposable
     private WriteableBitmap Bitmap => _bitmap ??= new WriteableBitmap(new PixelSize(_width, _height),
         new Avalonia.Vector(96, 96), PixelFormat.Bgra8888);
 
-    private const int _height = 720*4;
-    private const int _width = 1280*4;
-    private volatile byte[] pixels;
+    private const int _height = 720*2;
+    private const int _width = 1280*2;
+    private Memory<byte> pixels;
     private unsafe byte* pixels_ptr;
 
     private readonly Renderer _renderer = new(_width, _height);
@@ -43,13 +43,13 @@ public partial class MainViewModel : ViewModelBase, IDisposable
     {
         (_cameraX, _cameraY, _cameraZ) = (_currentScene.Camera.Location.X,
             _currentScene.Camera.Location.Y, _currentScene.Camera.Location.Z);
-        pixels = GC.AllocateArray<byte>(_width * _height * 4,true);
+
         unsafe
         {
-            fixed (byte* ptr = &pixels[0])
-            {
-                pixels_ptr = ptr;
-            }
+            const int size = sizeof(byte) * _width * _height * 4;
+            pixels_ptr = (byte*) Marshal.AllocHGlobal(size);
+            var manager = new UnmanagedMemoryManager(pixels_ptr, size);
+            pixels = manager.Memory;
         }
     }
 
@@ -145,6 +145,7 @@ public partial class MainViewModel : ViewModelBase, IDisposable
     [RelayCommand]
     public async Task RenderParalell()
     {
+
         if (IsBusy) return;
         IsBusy = true;
         lastRenderWasCpp = false;
@@ -154,7 +155,7 @@ public partial class MainViewModel : ViewModelBase, IDisposable
 
         var st = Stopwatch.StartNew();
 
-        await Task.Run(() => _renderer.Render(ref pixels, _currentScene));
+        await Task.Run(() => _renderer.Render(pixels, _currentScene));
 
 
             
@@ -178,7 +179,7 @@ public partial class MainViewModel : ViewModelBase, IDisposable
         ImageSource = null;
         using (var fb = Bitmap.Lock())
         {
-            fixed (byte* ptr = pixels)
+            var ptr = pixels.Pin().Pointer;
             {
                 Unsafe.CopyBlock((byte*)fb.Address, ptr, (uint)pixels.Length);
             }
@@ -198,10 +199,46 @@ public partial class MainViewModel : ViewModelBase, IDisposable
     private readonly List<float> _renderTimes = [];
 
 
-    public void Dispose()
+    public unsafe void Dispose()
     {
         _bitmap?.Dispose();
         CppInterop.FreeRenderer(_cppRenderer);
         CppInterop.FreeScene(_cppScene);
+        Marshal.FreeHGlobal((nint)pixels.Pin().Pointer);
+        
+    }
+}
+
+// Helper class to wrap unmanaged memory as Memory<byte>
+public unsafe class UnmanagedMemoryManager : MemoryManager<byte>
+{
+    private readonly byte* _pointer;
+    private readonly int _length;
+    private bool _disposed;
+
+    public UnmanagedMemoryManager(byte* pointer, int length)
+    {
+        _pointer = pointer;
+        _length = length;
+    }
+
+    public override Span<byte> GetSpan()
+    {
+        if (_disposed) throw new ObjectDisposedException(nameof(UnmanagedMemoryManager));
+        return new Span<byte>(_pointer, _length);
+    }
+
+    public override MemoryHandle Pin(int elementIndex = 0)
+    {
+        if (_disposed) throw new ObjectDisposedException(nameof(UnmanagedMemoryManager));
+        if (elementIndex < 0 || elementIndex >= _length) throw new ArgumentOutOfRangeException(nameof(elementIndex));
+        return new MemoryHandle(_pointer + elementIndex);
+    }
+
+    public override void Unpin() { }
+
+    protected override void Dispose(bool disposing)
+    {
+        _disposed = true;
     }
 }
