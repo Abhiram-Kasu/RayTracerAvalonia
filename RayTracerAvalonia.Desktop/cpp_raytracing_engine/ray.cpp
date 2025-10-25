@@ -11,7 +11,7 @@ using Eigen::Vector3f;
 Color Ray::trace(const Scene &scene) const {
   // TODO: Implement intersection logic and shading
   // For now, return background color as a placeholder
-  auto minDistance = std::numeric_limits<float>::infinity();
+  auto minDistance = std::numeric_limits<float>::max();
   Shape *closestShape = nullptr;
   Vector3f point;
 
