@@ -124,7 +124,7 @@ The C++ implementation typically achieves **3-4x faster** render times compared 
 | Implementation | Typical Render Time (2560x1440) |
 |---------------|----------------------------------|
 | C# (Parallel) | ~200ms                           |
-| C++ (OpenMP)  | ~47ms                            |
+| C++ (OpenMP)  | ~36ms                            |
 
 *Performance varies based on scene complexity and CPU capabilities*
 
