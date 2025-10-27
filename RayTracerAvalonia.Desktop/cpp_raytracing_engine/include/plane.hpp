@@ -15,6 +15,6 @@ struct Plane : public Shape {
 
   virtual auto getColor() const -> Color override;
   virtual auto intersect(const Ray &ray) const noexcept
-      -> std::vector<float> override;
+      -> Intersection override;
   virtual auto getNormalAt(Vector3f point) const noexcept -> Vector3f override;
 };

@@ -54,7 +54,7 @@ void *GetScene() { return scene; }
 void FreeScene(void *scene) { delete reinterpret_cast<Scene *>(scene); }
 
 void *CreateRenderer(uint16_t width, uint16_t height) {
-  std::println("Creating renderer width: {} height: {}", width, height);
+
   return new Renderer(width, height);
 }
 
@@ -68,7 +68,7 @@ void Raytrace(uint8_t *input, void *renderer, void *scene) {
 
   auto r_renderer = reinterpret_cast<Renderer *>(renderer);
   auto r_scene = reinterpret_cast<Scene *>(scene);
-  std::cout << "Raytrace called: " << *r_scene << std::endl;
+
 
   r_renderer->Render(input, r_scene);
 }

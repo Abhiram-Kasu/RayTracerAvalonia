@@ -1,10 +1,11 @@
 #include "include/sphere.hpp"
 #include <cmath>
 #include <limits>
+#include <tuple>
 
 auto Sphere::getColor() const -> Color { return color; }
 
-auto Sphere::intersect(const Ray &ray) const noexcept -> std::vector<float> {
+auto Sphere::intersect(const Ray &ray) const noexcept -> Intersection {
   Vector3f os = ray.start - center;
   float b = 2.0f * os.dot(ray.direction);
   float c = os.squaredNorm() - radius * radius;
@@ -21,7 +22,7 @@ auto Sphere::intersect(const Ray &ray) const noexcept -> std::vector<float> {
     float root = std::sqrt(disc);
     float t1 = (-b - root) / 2.0f;
     float t2 = (-b + root) / 2.0f;
-    return {t1, t2};
+    return std::tuple{t1, t2};
   }
 }
 

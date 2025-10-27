@@ -2,6 +2,8 @@
 #include "scene.hpp"
 #include <algorithm>
 #include <ranges>
+#include <type_traits>
+#include <variant>
 #include <vector>
 
 auto Shape::CastsShadowFor(Vector3f point, Vector3f lightVector) const noexcept
@@ -17,16 +19,34 @@ auto Shape::CastsShadowFor(Vector3f point, Vector3f lightVector) const noexcept
 auto Shape::ClosestDistanceAlongRay(Ray ray) const noexcept
     -> std::optional<float> {
   auto distances = this->intersect(ray);
-  if (distances.empty())
+
+  if (not distances)
     return std::nullopt;
 
   constexpr float epsilon = 1e-4f;
   std::optional<float> best;
-  for (float t : distances) {
-    if (t > epsilon && (!best || t < *best)) {
-      best = t;
+
+  std::visit([&](auto&& value) {
+    using T = std::decay_t<decltype(value)>;
+    if constexpr (std::is_same_v<T, float>) {
+
+        if (value > epsilon && (!best || value < *best)) {
+          best = value;
+      }
     }
-  }
+    else if constexpr (std::is_same_v<T, std::tuple<float, float>>) {
+      auto [t0, t1] = value;
+      for (float t : {t0, t1}) {
+        if (t > epsilon && (!best || t < *best)) {
+          best = t;
+        }
+      }
+    }
+    else {
+      static_assert(false, "non-exhaustive visitor!");
+    }
+  }, *distances);
+
   return best;
 }
 

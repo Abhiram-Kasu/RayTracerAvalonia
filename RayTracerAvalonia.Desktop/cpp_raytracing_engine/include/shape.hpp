@@ -2,14 +2,19 @@
 
 #include "color.hpp"
 #include "ray.hpp"
+#include <tuple>
+#include <variant>
 #include <vector>
 
 // Forward declaration to avoid circular dependency
 struct Scene;
 
 struct Shape {
+  using Intersection =
+      std::optional<std::variant<float, std::tuple<float, float>>>;
+
   virtual auto getColor() const -> Color = 0;
-  virtual auto intersect(const Ray &ray) const -> std::vector<float> = 0;
+  virtual auto intersect(const Ray &ray) const -> Intersection = 0;
 
   virtual auto getNormalAt(Vector3f point) const noexcept -> Vector3f = 0;
 

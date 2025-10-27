@@ -18,7 +18,7 @@ struct Box : public Shape {
   }
 
   virtual auto getColor() const -> Color;
-  virtual auto intersect(const Ray &ray) const noexcept -> std::vector<float>;
+  virtual auto intersect(const Ray &ray) const noexcept -> Intersection;
 
   virtual auto getNormalAt(Vector3f point) const noexcept -> Vector3f;
 };

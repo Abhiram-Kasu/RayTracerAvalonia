@@ -2,15 +2,14 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <optional>
+#include <tuple>
 
 auto Box::getColor() const -> Color { return color; }
 
 // Fast AABB ray intersection using slab method - much faster than the original
 // C# approach
-auto Box::intersect(const Ray &ray) const noexcept -> std::vector<float> {
-  // TODO use variant for return type
-  std::vector<float> intersections;
-  intersections.reserve(2);
+auto Box::intersect(const Ray &ray) const noexcept -> Intersection {
 
   // Practical epsilons for robustness under -ffast-math
   constexpr float parallel_eps = 1e-6f; // treat near-zero dir as parallel
@@ -29,7 +28,7 @@ auto Box::intersect(const Ray &ray) const noexcept -> std::vector<float> {
     if (std::abs(dir) < parallel_eps) {
       // Ray is parallel to the slab - if start is outside the slab, no hit
       if (start < lower || start > upper) {
-        return {}; // No intersection
+        return std::nullopt; // No intersection
       }
       // Inside slab; this axis imposes no constraint on t
       continue;
@@ -50,17 +49,29 @@ auto Box::intersect(const Ray &ray) const noexcept -> std::vector<float> {
 
     // If the interval becomes invalid, no intersection
     if (tmin > tmax || tmax < 0.0f) {
-      return {}; // No intersection
+      return std::nullopt; // No intersection
     }
   }
 
   // Add valid intersections (strictly positive to avoid self-intersection)
-  if (tmin > hit_eps)
-    intersections.push_back(tmin);
-  if (tmax > hit_eps && tmax != tmin)
-    intersections.push_back(tmax);
+  float intersections[2] = {};
+  int ptr = 0;
 
-  return intersections;
+  if (tmin > hit_eps)
+    intersections[ptr++] = tmin;
+  if (tmax > hit_eps && tmax != tmin)
+    intersections[ptr++] = tmax;
+
+  switch (ptr) {
+  case 0:
+    return std::nullopt;
+  case 1:
+    return {intersections[0]};
+  case 2:
+    return std::tuple{intersections[0], intersections[1]};
+    default:
+      return std::nullopt; // Should not reach here
+  }
 }
 
 auto Box::getNormalAt(Vector3f pos) const noexcept -> Vector3f {

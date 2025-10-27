@@ -4,7 +4,7 @@
 
 auto Plane::getColor() const -> Color { return color; }
 
-auto Plane::intersect(const Ray &ray) const noexcept -> std::vector<float> {
+auto Plane::intersect(const Ray &ray) const noexcept -> Intersection {
   float angle = normal.dot(ray.direction);
 
   // If the dot-product is zero, the ray is parallel to the plane
