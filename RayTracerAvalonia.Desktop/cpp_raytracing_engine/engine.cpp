@@ -8,7 +8,7 @@
 #include <memory>
 #include <print>
 
-const static auto scene = []() {
+const static auto scene = [] {
   auto backgroundColor = Color(0, 0, 0);
   auto light = Light({-30, 25, -12}, Color(255, 255, 255));
   /*
